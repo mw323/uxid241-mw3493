@@ -102,7 +102,7 @@ $recipes = [
 
   <section class="recipes">
     <div class="recipes-heading">  
-      <div>
+      <div class="heading-text">
         <span class="eyebrow">The recipe index</span>
         <h2>Browse all the recipes</h2>
         <p>Reliable favorites and fresh ideas, tested until every detail earns its place.</p>
