@@ -195,6 +195,10 @@ body{
     font-family: var(--font-secondary);
 }
 
+.search-bar input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--tag--button--filter--search--card-background) inset;
+}
+
 .search-bar button{
     height: 100%;
     padding: 0 25px;
@@ -206,6 +210,11 @@ body{
     font-family: var(--font-secondary);
     font-weight: 500;
     cursor: pointer;
+}
+
+.validation{
+    color: var(--primary-color);
+    font-size: 20px;
 }
 
 /* recipe-section */
@@ -522,7 +531,6 @@ select{
         width: 45px;
         height: 45px;
         border-radius: 50px;
-
     }
 
     .close-icon{
@@ -600,6 +608,7 @@ select{
     .hero{
         min-height: 70vh;
     }
+
     .navigation{
         padding: 1.7rem 30px;
     }
