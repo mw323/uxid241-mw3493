@@ -2,6 +2,16 @@
 
 declare(strict_types=1);
 
+function get_value(string $key): string {
+  return trim($_GET[$key] ?? '');
+}
+
+function e(string $value): string {
+  return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+$search = get_value('search');
+
 $recipes = [
     [
       "name" => "Ancho Orange Chicken",
@@ -82,7 +92,7 @@ $recipes = [
 
         <p class="search-description">Search recipes by dish name, food type, or ingredient.</p>
 
-        <form class="search-bar">
+        <form class="search-bar" action="index.php" method="get">
 
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.2501 19.2501L15.2718 15.2718M17.4167 10.0833C17.4167 14.1334 14.1334 17.4167 10.0833 17.4167C6.03324 17.4167 2.75 14.1334 2.75 10.0833C2.75 6.03324 6.03324 2.75 10.0833 2.75C14.1334 2.75 17.4167 6.03324 17.4167 10.0833Z" stroke="#697168" stroke-width="2" stroke-linecap="round"/>
@@ -92,11 +102,22 @@ $recipes = [
             type="search"
             name="search"
             placeholder="Search recipes..."
+            value="<?php echo e($search); ?>"
           >
 
           <button type="submit" class="search-button">Search</button>
           
         </form>
+
+        <?php
+          if (isset($_GET['search'])) {
+            if ($search === '') {
+              echo '<p class="validation">Please enter a search term.</p>';
+            } else {
+              echo '<p class="validation">You searched for: ' . e($search) . '</p>';
+            }
+          }
+        ?>
     </div>
   </header>
 
