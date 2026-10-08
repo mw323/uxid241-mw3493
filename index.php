@@ -186,6 +186,14 @@ $recipes = [
 
     <div class="recipe-list">
       <?php foreach ($recipes as $recipe): ?>
+        
+        <?php //AI-assisted: Used AI to help create the recipe search filtering.
+        if (
+          $search === '' || // This checks if the search is empty. If it is empty, all recipes are displayed.
+          stripos($recipe['name'], $search) !== false //This checks if the recipe name contains the search term. stripos() makes the search case-insensitive. (false !== false means the search term was not found in the recipe name.)
+        ): 
+        ?>
+
         <article class="recipe-card">
           <div class="recipe-image">
             <img src="<?php echo $recipe["image"]; ?>" alt="<?php echo $recipe["name"]; ?>">
@@ -208,6 +216,7 @@ $recipes = [
             </div>
           </div>
         </article>
+        <?php endif; ?>
       <?php endforeach; ?>
     </div>
   </div>
