@@ -15,3 +15,5 @@ This project is an online cookbook designed to provide a simple way to browse an
 - ChatGPT — I asked why the content inside a container was sticking out after I added `border-radius`, and what CSS property I could use to fix it. ChatGPT suggested `overflow: hidden` and explained that it hides any content that extends outside the container. After understanding how it works, I used this solution in my CSS.
 
 - ChatGPT — I shared part of my HTML and asked how to select the recipe number inside the first button so I could style it. ChatGPT broke down the structure of my HTML and explained how to use a CSS selector to target the element I wanted. I then wrote and tested the CSS myself.
+
+- ChatGPT — I used ChatGPT to help me understand and create the PHP search filtering logic for my recipe page. AI helped me use stripos() to check whether a recipe name contains the user's search term and make the search case-insensitive. I also used AI to understand the if condition, ||, and !== false. I reviewed the code and tested the search with different inputs to make sure I understood how it works.
