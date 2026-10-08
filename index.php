@@ -103,6 +103,7 @@ $recipes = [
             name="search"
             placeholder="Search recipes..."
             value="<?php echo e($search); ?>"
+            required
           >
 
           <button type="submit" class="search-button">Search</button>
