@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once 'db.php';
+
 function get_value(string $key): string {
   return trim($_GET[$key] ?? '');
 }
@@ -12,34 +14,10 @@ function e(string $value): string {
 
 $search = get_value('search');
 
-$recipes = [
-    [
-      "name" => "Ancho Orange Chicken",
-      "category" => "Meat",
-      "description" => "with Kale Rice & Roasted Carrots",
-      "time" => "35 min",
-      "difficulty" => "Medium",
-      "image" => "images/ancho_orange_chicken.jpg"
-    ],
 
-    [
-      "name" => "Beef Medallions & Mushroom Sauce",
-      "category" => "Meat",
-      "description" => "with Mashed Potatoes",
-      "time" => "30 min",
-      "difficulty" => "Medium",
-      "image" => "images/beef_medallions_mushroom_sauce.jpg"
-    ],
-
-    [
-      "name" => "Broccoli & Basil Pesto Sandwiches",
-      "category" => "Vegetarian",
-      "description" => "with Romaine & Citrus Salad",
-      "time" => "30 min",
-      "difficulty" => "Medium",
-      "image" => "images/broccoli_basil_pesto_sandwiches.jpg"
-    ],
-];
+$sql = 'SELECT id, title, subtitle, category, main_image FROM recipes';
+$result = mysqli_query($conn, $sql);
+$recipes = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +68,7 @@ $recipes = [
 
         <h1>What are you<br>craving today?</h1>
 
-        <p class="search-description">Search recipes by dish name, food type, or ingredient.</p>
+        <p class="search-description">Search recipes by dish name.</p>
 
         <form class="search-bar" action="index.php" method="get">
 
@@ -128,23 +106,6 @@ $recipes = [
         <span class="eyebrow">The recipe index</span>
         <h2>Browse all the recipes</h2>
         <p>Reliable favorites and fresh ideas, tested until every detail earns its place.</p>
-      </div>
-
-      <div class="filters">
-        <select>
-          <option value="" disabled selected hidden>Difficulty</option>           
-          <option>Easy</option>
-          <option>Medium</option>
-          <option>Hard</option>
-        </select>
-
-        <select>
-          <option value="" disabled selected hidden>Duration</option> 
-          <option>Under 30 min</option>
-          <option>30–50 min</option>
-        </select>
-
-        <button type="button" class="clear-button" id="clear-filters">Clear All</button>
       </div>
     </div>
 
@@ -191,30 +152,19 @@ $recipes = [
         <?php //AI-assisted: Used AI to help create the recipe search filtering.
         if (
           $search === '' || // This checks if the search is empty. If it is empty, all recipes are displayed.
-          stripos($recipe['name'], $search) !== false //This checks if the recipe name contains the search term. stripos() makes the search case-insensitive. (false !== false means the search term was not found in the recipe name.)
+          stripos($recipe['title'], $search) !== false //This checks if the recipe name contains the search term. stripos() makes the search case-insensitive. (false !== false means the search term was not found in the recipe name.)
         ): 
         ?>
 
         <article class="recipe-card">
           <div class="recipe-image">
-            <img src="<?php echo $recipe["image"]; ?>" alt="<?php echo $recipe["name"]; ?>">
-            <span><?php echo $recipe["category"]; ?></span>
+            <img src="<?php echo e($recipe['main_image']); ?>" alt="<?php echo e($recipe['title']); ?>">
+            <span><?php echo e($recipe['category']); ?></span>
           </div>
 
           <div class="recipe-content">
-            <div class="recipe-description">
-              <h3><?php echo $recipe["name"]; ?></h3>
-              <p><?php echo $recipe["description"]; ?></p>
-            </div>
-
-            <div class="recipe-details">
-              <span class="time"><svg width="17" height="17" viewBox="0 0 19 19" class="alarm-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.50008 4.55206C7.97785 4.55206 6.51796 5.15677 5.44158 6.23315C4.3652 7.30953 3.7605 8.76941 3.7605 10.2916C3.7605 11.8139 4.3652 13.2738 5.44158 14.3501C6.51796 15.4265 7.97785 16.0312 9.50008 16.0312C11.0223 16.0312 12.4822 15.4265 13.5586 14.3501C14.635 13.2738 15.2397 11.8139 15.2397 10.2916C15.2397 8.76941 14.635 7.30953 13.5586 6.23315C12.4822 5.15677 11.0223 4.55206 9.50008 4.55206ZM2.573 10.2916C2.573 8.45447 3.30281 6.69254 4.60189 5.39346C5.90097 4.09438 7.6629 3.36456 9.50008 3.36456C11.3373 3.36456 13.0992 4.09438 14.3983 5.39346C15.6974 6.69254 16.4272 8.45447 16.4272 10.2916C16.4272 12.1288 15.6974 13.8908 14.3983 15.1898C13.0992 16.4889 11.3373 17.2187 9.50008 17.2187C7.6629 17.2187 5.90097 16.4889 4.60189 15.1898C3.30281 13.8908 2.573 12.1288 2.573 10.2916Z" fill="#697168"/>
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 5.73957C9.65747 5.73957 9.80849 5.80212 9.91984 5.91347C10.0312 6.02482 10.0938 6.17585 10.0938 6.33332V9.96232L12.1901 11.2725C12.2562 11.3139 12.3135 11.3679 12.3588 11.4314C12.404 11.495 12.4363 11.5668 12.4538 11.6428C12.4713 11.7188 12.4737 11.7975 12.4608 11.8744C12.4478 11.9514 12.4199 12.025 12.3785 12.0911C12.3371 12.1572 12.2831 12.2146 12.2196 12.2598C12.1561 12.3051 12.0842 12.3374 12.0082 12.3549C11.8547 12.3902 11.6935 12.3631 11.5599 12.2795L9.18492 10.7952C9.09959 10.7417 9.02925 10.6675 8.98051 10.5794C8.93176 10.4913 8.90621 10.3923 8.90625 10.2917V6.33332C8.90625 6.17585 8.96881 6.02482 9.08016 5.91347C9.19151 5.80212 9.34253 5.73957 9.5 5.73957ZM5.16958 2.74707C5.28077 2.8584 5.34323 3.00931 5.34323 3.16665C5.34323 3.324 5.28077 3.47491 5.16958 3.58624L3.19042 5.5654C3.07786 5.67028 2.92899 5.72738 2.77517 5.72467C2.62135 5.72195 2.47459 5.65964 2.3658 5.55085C2.25701 5.44207 2.1947 5.2953 2.19199 5.14148C2.18927 4.98766 2.24637 4.83879 2.35125 4.72624L4.33042 2.74707C4.44175 2.63588 4.59266 2.57343 4.75 2.57343C4.90734 2.57343 5.05826 2.63588 5.16958 2.74707ZM13.8304 2.74707C13.7192 2.8584 13.6568 3.00931 13.6568 3.16665C13.6568 3.324 13.7192 3.47491 13.8304 3.58624L15.8096 5.5654C15.8639 5.62374 15.9295 5.67053 16.0023 5.70298C16.0752 5.73543 16.1538 5.75288 16.2335 5.75429C16.3132 5.75569 16.3924 5.74103 16.4663 5.71117C16.5403 5.6813 16.6074 5.63686 16.6638 5.58047C16.7202 5.52409 16.7647 5.45693 16.7945 5.383C16.8244 5.30907 16.839 5.22988 16.8376 5.15016C16.8362 5.07043 16.8188 4.99181 16.7863 4.91898C16.7539 4.84614 16.7071 4.78059 16.6488 4.72624L14.6696 2.74707C14.5583 2.63588 14.4073 2.57343 14.25 2.57343C14.0927 2.57343 13.9417 2.63588 13.8304 2.74707Z" fill="#697168"/>
-              </svg><?php echo $recipe["time"]; ?></span>
-
-              <span class="difficulty"><?php echo $recipe["difficulty"]; ?></span>
-            </div>
+              <h3><?php echo e($recipe['title']); ?></h3>
+              <p><?php echo e($recipe['subtitle']); ?></p>
           </div>
         </article>
         <?php endif; ?>
