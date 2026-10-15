@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2026 at 11:03 PM
+-- Generation Time: Oct 15, 2026 at 10:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.4.25
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cookbook`
 --
+CREATE DATABASE IF NOT EXISTS `cookbook` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `cookbook`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `recipes`
 --
 
+DROP TABLE IF EXISTS `recipes`;
 CREATE TABLE `recipes` (
   `id` int(11) NOT NULL,
   `title` varchar(120) NOT NULL,
