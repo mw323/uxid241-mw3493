@@ -11,10 +11,11 @@ try {
         $config['host'],
         $config['username'],
         $config['password'],
-        $config['database']
+        $config['database'],
+        (int) $config['port']
     );
 
-    mysqli_set_charset($conn, 'utf8mb4');
+    mysqli_set_charset($conn, $config['charset']);
 
 } catch (mysqli_sql_exception $e) {
     exit('Database connection failed.');
