@@ -24,3 +24,14 @@ function search_recipes(mysqli $conn, string $search): array {
     $result = mysqli_execute_query($conn, $sql, [$like, $like]);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
+function category_counts(mysqli $conn): array {
+    $sql = 'SELECT categories.name, COUNT(*) AS recipe_count
+            FROM recipes
+            INNER JOIN categories ON recipes.category_id = categories.id
+            GROUP BY categories.name
+            ORDER BY recipe_count DESC';
+
+    $result = mysqli_query($conn, $sql);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
