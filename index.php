@@ -15,7 +15,14 @@ function e(string $value): string {
 
 $search = get_value('search');
 
-$recipes = all_recipes($conn);
+if ($search === '') {
+  $recipes = all_recipes($conn);
+} else {
+  $recipes = search_recipes($conn, $search);
+}
+
+$result = mysqli_query($conn, 'SELECT COUNT(*) AS total FROM recipes');
+$total = (int) mysqli_fetch_assoc($result)['total'];
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +127,7 @@ $recipes = all_recipes($conn);
           <path d="M15 10.5H11.25C10.8358 10.5 10.5 10.8358 10.5 11.25V15C10.5 15.4142 10.8358 15.75 11.25 15.75H15C15.4142 15.75 15.75 15.4142 15.75 15V11.25C15.75 10.8358 15.4142 10.5 15 10.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
           <path d="M6.75 10.5H3C2.58579 10.5 2.25 10.8358 2.25 11.25V15C2.25 15.4142 2.58579 15.75 3 15.75H6.75C7.16421 15.75 7.5 15.4142 7.5 15V11.25C7.5 10.8358 7.16421 10.5 6.75 10.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
           </svg></span>All recipes
-          <span class="recipe-number">40</span>
+          <span class="recipe-number"><?php echo $total; ?></span>
         </button>
           
         <button><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,14 +153,6 @@ $recipes = all_recipes($conn);
 
     <div class="recipe-list">
       <?php foreach ($recipes as $recipe): ?>
-        
-        <?php //AI-assisted: Used AI to help create the recipe search filtering.
-        if (
-          $search === '' || // This checks if the search is empty. If it is empty, all recipes are displayed.
-          stripos($recipe['title'], $search) !== false //This checks if the recipe name contains the search term. stripos() makes the search case-insensitive. (false !== false means the search term was not found in the recipe name.)
-        ): 
-        ?>
-
         <article class="recipe-card">
           <div class="recipe-image">
             <img src="<?php echo e($recipe['main_image']); ?>" alt="<?php echo e($recipe['title']); ?>">
@@ -165,7 +164,6 @@ $recipes = all_recipes($conn);
               <p><?php echo e($recipe['subtitle']); ?></p>
           </div>
         </article>
-        <?php endif; ?>
       <?php endforeach; ?>
     </div>
   </div>
