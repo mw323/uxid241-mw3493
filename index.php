@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once 'db.php';
+require_once 'functions.php';
 
 function get_value(string $key): string {
   return trim($_GET[$key] ?? '');
@@ -14,10 +15,7 @@ function e(string $value): string {
 
 $search = get_value('search');
 
-
-$sql = 'SELECT id, title, subtitle, category, main_image FROM recipes';
-$result = mysqli_query($conn, $sql);
-$recipes = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$recipes = all_recipes($conn);
 ?>
 
 <!DOCTYPE html>
