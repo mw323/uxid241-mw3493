@@ -4,6 +4,15 @@
 
 This project is an online cookbook designed to provide a simple way to browse and manage a collection of recipes. It is a server-side web application built with PHP and a database, with features for browsing, searching, filtering, and managing recipe information. The project brings together the PHP and database skills developed throughout the course into a complete web application.
 
+## How to run it locally?
+
+1. Clone or download this repository and place the project folder inside your `htdocs` folder.
+2. Start Apache and MySQL using XAMPP or MAMP.
+3. Create a new database in phpMyAdmin and import `schema.sql`.
+4. Copy `config.example.php` to `config.php`.
+5. Update `config.php` with your local database credentials and database name.
+6. Open the project through `localhost` in your web browser.
+
 ## AI use
 
 - ChatGPT — I asked how to keep “Difficulty” and “Duration” displayed as the default text in my select boxes without showing them as options when the dropdown is opened. ChatGPT showed me how to use `value=""`, `disabled`, `selected`, and `hidden` and explained what each one does. After understanding the explanation, I applied them to my own HTML.
@@ -16,4 +25,4 @@ This project is an online cookbook designed to provide a simple way to browse an
 
 - ChatGPT — I shared part of my HTML and asked how to select the recipe number inside the first button so I could style it. ChatGPT broke down the structure of my HTML and explained how to use a CSS selector to target the element I wanted. I then wrote and tested the CSS myself.
 
-- ChatGPT — I used ChatGPT to help me understand and create the PHP search filtering logic for my recipe page. AI helped me use stripos() to check whether a recipe name contains the user's search term and make the search case-insensitive. I also used AI to understand the if condition, ||, and !== false. I reviewed the code and tested the search with different inputs to make sure I understood how it works.
+- ChatGPT — I understood how `GROUP BY` works and initially wanted to output the query results directly with `echo`. I then realized that the query returns multiple rows, one for each category, and I needed a way to map each returned row to the corresponding category in my fixed UI. I asked ChatGPT how to output the data correctly. ChatGPT explained how to access the returned results and generated the code that assigns each category count to its corresponding variable for display.
