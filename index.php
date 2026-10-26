@@ -62,7 +62,6 @@ foreach ($category_counts as $category_count) {
 <body>
   <header class="hero">
     <div class="navigation">
-
       <div class="logo-section">
         <a href="index.php" class="logo">
           <span class="logo-icon"><svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +73,7 @@ foreach ($category_counts as $category_count) {
 
       <div class="nav" id="navMenu">
         <a href="index.php" class="active">Home</a>
-        <a href="#">Recipes</a>
+        <a href="all-recipes.php">Recipes</a>
         <a href="#">Login</a>
       </div>
       
