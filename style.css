@@ -85,6 +85,10 @@ body{
     text-decoration: none;
 }
 
+.logo-section{
+    outline: none;
+}
+
 .logo-icon{
     width: 35px;
     height: 35px;
@@ -390,7 +394,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 90px;
+    min-height: 5vh;
     padding: 25px 150px;
     background-color: var(--active--footerbg-color);
     color: var(--primary-color);
@@ -408,6 +412,222 @@ body{
     font-size: 14px;
     font-family: var(--font-secondary);
 }
+
+/* recipe detail page */
+.recipe-header{
+    min-height: 5vh;
+    background-color: var(--tag-text-color);
+}
+
+.recipe-hero{
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.breadcrumb{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: -50px 0 60px;
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--info-color);
+}
+
+.breadcrumb a{
+    text-decoration: none;
+    color: var(--info-color);
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover{
+    color: var(--active--footerbg-color);
+}
+
+.current-page{
+    color: var(--active--footerbg-color);
+}
+
+.recipe-title{
+    margin: 0;
+    font-family: var(--font-main);
+    font-size: 48px;
+    font-weight: 400;
+}
+
+.subtitle{
+    margin: 14px 0 0;
+    font-family: var(--font-main);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--active--footerbg-color);
+}
+
+.subtitle::after{
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    margin-top: 22px;
+    background-color: var(--secondary-color);
+}
+
+.description{
+    max-width: 580px;
+    margin: 35px 0 0;
+    font-family: var(--font-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--info-color);
+}
+
+.hero-image{
+    height: 390px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px var(--shadow);
+}
+
+.hero-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ingredients{
+    width: 100%;
+    background-color: var(--tag--button--search--card-background);
+    padding: 60px 0 80px;
+}
+
+.ingredients-heading{
+    font-family: var(--font-main);
+    font-weight: 400;
+    font-size: 44px;
+    margin: 10px 0 0;
+}
+
+.ingredients-container{
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.ingredients-list{
+    margin: 30px 0;
+}
+
+.ingredients-list{
+    padding-left: 18px;
+}
+
+.ingredients-list li{
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+}
+
+.ingredients-content{
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.ingredients-list-container{
+    flex: 1;
+}
+
+.ingredients-image-container{
+    flex: 1;
+    margin-top: -50px;
+}
+
+.ingredients-image{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.cooking-steps{
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 70px 40px 90px;
+}
+
+.section-heading{
+    margin-bottom: 35px;
+}
+
+.section-heading .eyebrow{
+    margin: 0;
+}
+
+.directions-heading{
+    margin: 8px 0 0;
+    font-family: var(--font-main);
+    font-size: 44px;
+    font-weight: 400;
+}
+
+.steps{
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 45px;
+    align-items: start;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--stroke-color);
+}
+
+.step-image{
+    display: block;
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 14px 30px var(--shadow);
+}
+
+.step-heading{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.step-number{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: var(--active--footerbg-color);
+    color: white;
+    font-family: var(--font-secondary);
+    font-size: 14px;
+}
+
+.step-heading h3{
+    margin: 0;
+    font-family: var(--font-main);
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.step-info > p{
+    margin: 18px 0 0;
+    font-family: var(--font-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--tag-text-color);
+}
+
 
 @media (max-width: 1200px){
     .navigation{
