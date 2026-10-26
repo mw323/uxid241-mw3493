@@ -416,7 +416,7 @@ body{
 /* recipe detail page */
 .recipe-header{
     min-height: 5vh;
-    background-color: var(--tag-text-color);
+    background-color: var(--active--footerbg-color);
 }
 
 .recipe-hero{
