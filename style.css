@@ -277,7 +277,7 @@ body{
     justify-content: center;
 }
 
-.categories button{
+.category-list a{
     display: flex;
     align-items: center;
     gap: 13px;
@@ -290,16 +290,28 @@ body{
     cursor: pointer;
     font-family: var(--font-secondary);
     font-size: 14px;
+    text-decoration: none;
+    color: inherit;
 }
 
-.category-list button:first-child{
+.category-list a.active{
     background-color: var(--active--footerbg-color);
     color: white;
     font-weight: 500;
 }
 
-.category-list button:first-child .recipe-number{
-    color: white; 
+.category-list a.active .recipe-number{
+    color: white;
+}
+
+.category-list a:nth-child(2).active svg path,
+.category-list a:nth-child(3).active svg path{
+    fill: white;
+}
+
+.category-list a:first-child.active svg path,
+.category-list a:last-child.active svg path{
+    stroke: white;
 }
 
 .recipe-number{
