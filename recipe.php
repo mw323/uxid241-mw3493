@@ -1,9 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+require_once 'db.php';
+require_once 'functions.php';
+
+function e(string $value): string {
+  return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+$id = (int) $_GET['id'];
+
+$recipe = recipe_by_id($conn, $id);
+$ingredients = ingredients_by_recipe($conn, $id);
+$steps = steps_by_recipe($conn, $id);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo e($recipe['title']); ?></title>
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -42,25 +61,21 @@
             <div class="breadcrumb">
                 <a href="all-recipes.php">Recipes</a>
                 <span>/</span>
-                <span class="current-page">Ancho-Orange Chicken</span>
+                <span class="current-page"><?php echo e($recipe['title']); ?></span>
             </div>
-            <h1 class="recipe-title">Ancho-Orange Chicken</h1>
+            <h1 class="recipe-title"><?php echo e($recipe['title']); ?></h1>
             <p class="subtitle">
-                with Kale Rice &amp; Roasted Carrots
+                <?php echo e($recipe['subtitle']); ?>
             </p>
             <p class="description">
-                We’re amping up chicken breasts with a glaze of smoky ancho
-                chile paste and fresh orange juice in this recipe. On the
-                side, roasted carrots and lightly creamy, golden
-                raisin-studded rice perfectly accent the sweetness of
-                the glaze.
+                <?php echo e($recipe['description']); ?>
             </p>
         </div>
 
         <div class="hero-image">
         <img
-          src="images/ancho-orange-chicken/dish.jpg"
-          alt="Ancho-orange glazed chicken with kale rice and roasted carrots"/>
+          src="<?php echo e($recipe['main_image']); ?>"
+          alt="<?php echo e($recipe['title']); ?>"/>
         </div>
     </section>
 
@@ -74,25 +89,18 @@
             <div class="ingredients-content">
                 <div class="ingredients-list-container">
                     <ul class="ingredients-list">
-                        <li>4 Boneless, Skinless Chicken Breasts</li>
-                        <li>1 Tbsp Ancho Chile Paste</li>
-                        <li>2 Tbsps Crème Fraîche</li>
-                        <li>3 Tbsps Golden Raisins</li>
-                        <li>¾ cup Jasmine Rice</li>
-                        <li>¾ lb Carrots</li>
-                        <li>2 cloves Garlic</li>
-                        <li>1 bunch Kale</li>
-                        <li>1 Lime</li>
-                        <li>1 Orange</li>
-                        <li>2 Tbsps Butter</li>
+                        <?php foreach ($ingredients as $ingredient): ?>
+                            <li>
+                                <?php echo e($ingredient['ingredient']); ?>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
 
                 <div class="ingredients-image-container">
                     <img class="ingredients-image"
-                        src="images/ancho-orange-chicken/ingredients.png"
-                        alt="Ingredients for Ancho-Orange Chicken"
-                        width="551" height="367"/>
+                        src="<?php echo e($recipe['ingredients_image']); ?>"
+                        alt="Ingredients for <?php echo e($recipe['title']); ?>"/>
                 </div>
             </div>
         </div>
@@ -102,36 +110,28 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Let’s get cooking</p>
-          <h2 class="directions-heading">Instructions</h2>
+          <h2 class="directions-heading">Directions</h2>
         </div>
       </div>
 
+    <?php foreach ($steps as $step): ?>
       <div class="steps">
         <div>
             <img class="step-image"
-               src="images/ancho-orange-chicken/step-1.jpg"
-               width="551" height="367"/>
+               src="<?php echo e($step['step_image']); ?>" alt="step-image">
         </div>
 
         <div class="step-info">
             <div class="step-heading">
-              <span class="step-number" aria-hidden="true">1</span>
-              <h3>Cook the rice</h3>
+              <span class="step-number"><?php echo e((string) $step['step_number']); ?></span>
+              <h3><?php echo e($step['title']); ?></h3>
             </div>
             <p>
-              Place an oven rack in the center of the oven, then
-              preheat to 450°F. In a medium pot, combine the rice,
-              a big pinch of salt, and 1½ cups of water. Heat to
-              boiling on high.
-            </p>
-            <p>
-              Once boiling, cover and reduce the heat to low.
-              Cook 12 to 14 minutes, or until the water has been
-              absorbed and the rice is tender. Turn off the heat
-              and fluff with a fork. Cover to keep warm.
+             <?php echo e($step['description']); ?>
             </p>
           </div>
         </div>
+    <?php endforeach; ?>
     </section>
 
     <footer class="site-footer">
