@@ -35,3 +35,14 @@ function category_counts(mysqli $conn): array {
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
+function recipes_by_category(mysqli $conn, string $category): array {
+    $sql = 'SELECT recipes.id, recipes.title, recipes.subtitle, recipes.main_image, categories.name AS category
+        FROM recipes
+        INNER JOIN categories ON recipes.category_id = categories.id
+        WHERE categories.name = ?
+        ORDER BY recipes.title';
+
+    $result = mysqli_execute_query($conn, $sql, [$category]);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
