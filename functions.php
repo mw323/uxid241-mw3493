@@ -46,3 +46,35 @@ function recipes_by_category(mysqli $conn, string $category): array {
     $result = mysqli_execute_query($conn, $sql, [$category]);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
+/* recipe detail page */
+function recipe_by_id(mysqli $conn, int $id): array {
+    $sql = 'SELECT recipes.id, recipes.title, recipes.subtitle, recipes.description, 
+            recipes.main_image, recipes.ingredients_image, categories.name AS category
+            FROM recipes
+            INNER JOIN categories ON recipes.category_id = categories.id
+            WHERE recipes.id = ?';
+
+    $result = mysqli_execute_query($conn, $sql, [$id]);
+    return mysqli_fetch_assoc($result);
+}
+
+function ingredients_by_recipe(mysqli $conn, int $recipe_id): array {
+    $sql = 'SELECT ingredient
+            FROM ingredients
+            WHERE recipe_id = ?
+            ORDER BY sort_order';
+
+    $result = mysqli_execute_query($conn, $sql, [$recipe_id]);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function steps_by_recipe(mysqli $conn, int $recipe_id): array {
+    $sql = 'SELECT step_number, title, description, step_image
+            FROM steps
+            WHERE recipe_id = ?
+            ORDER BY step_number';
+
+    $result = mysqli_execute_query($conn, $sql, [$recipe_id]);
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
