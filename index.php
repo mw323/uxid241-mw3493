@@ -73,7 +73,7 @@ foreach ($category_counts as $category_count) {
       </div>
 
       <div class="nav" id="navMenu">
-        <a href="index.php">Home</a>
+        <a href="index.php" class="active">Home</a>
         <a href="#">Recipes</a>
         <a href="#">Login</a>
       </div>

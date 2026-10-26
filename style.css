@@ -120,7 +120,7 @@ body{
     color: var(--primary-color);
 }
 
-.nav a:first-child{
+.nav a.active{
     color: var(--primary-color);
 }
 
