@@ -177,6 +177,7 @@ foreach ($category_counts as $category_count) {
 
     <div class="recipe-list">
       <?php foreach ($recipes as $recipe): ?>
+        <a class="recipe-link" href="recipe.php?id=<?php echo e((string) $recipe['id']); ?>">
         <article class="recipe-card">
           <div class="recipe-image">
             <img src="<?php echo e($recipe['main_image']); ?>" alt="<?php echo e($recipe['title']); ?>">
@@ -188,6 +189,7 @@ foreach ($category_counts as $category_count) {
               <p><?php echo e($recipe['subtitle']); ?></p>
           </div>
         </article>
+        </a>
       <?php endforeach; ?>
     </div>
   </div>
