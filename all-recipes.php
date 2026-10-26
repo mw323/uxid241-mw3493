@@ -1,0 +1,151 @@
+<?php
+
+declare(strict_types=1);
+
+require_once 'db.php';
+require_once 'functions.php';
+
+function get_value(string $key): string {
+    return trim($_GET[$key] ?? '');
+}
+
+function e(string $value): string {
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
+$category = get_value('category');
+
+if ($category !== '') {
+    $recipes = recipes_by_category($conn, $category);
+} else {
+    $recipes = all_recipes($conn);
+}
+
+$result = mysqli_query($conn, 'SELECT COUNT(*) AS total FROM recipes');
+$total = (int) mysqli_fetch_assoc($result)['total'];
+
+$category_counts = category_counts($conn);
+
+$meat_count = 0;
+$seafood_count = 0;
+$vegetarian_count = 0;
+
+foreach ($category_counts as $category_count) {
+    if ($category_count['name'] === 'Meat') {
+        $meat_count = $category_count['recipe_count'];
+    }
+    if ($category_count['name'] === 'Seafood') {
+        $seafood_count = $category_count['recipe_count'];
+    }
+    if ($category_count['name'] === 'Vegetarian') {
+        $vegetarian_count = $category_count['recipe_count'];
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Recipes</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="recipe-header">
+    <div class="navigation">
+      <div class="logo-section">
+        <a href="index.php" class="logo">
+          <span class="logo-icon"><svg width="8" height="16" viewBox="0 0 8 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.24347 6.84222e-08H5.75266C6.9074 6.84222e-08 7.7722 1.21229 7.53725 2.50465C7.46227 2.90493 7.15234 3.19085 6.79742 3.19085H1.20371C0.843794 3.19085 0.538865 2.90493 0.463882 2.50465C0.408576 2.202 0.412971 1.88905 0.476748 1.58859C0.540524 1.28813 0.662076 1.00773 0.832552 0.767794C1.00303 0.527861 1.21814 0.334442 1.46221 0.201621C1.70629 0.0687996 1.97319 -7.9247e-05 2.24347 6.84222e-08ZM2.49341 1.25232C2.56501 1.25232 2.63367 1.21979 2.68429 1.16188C2.73491 1.10397 2.76335 1.02543 2.76335 0.943531C2.76335 0.861635 2.73491 0.783092 2.68429 0.725182C2.63367 0.667273 2.56501 0.634739 2.49341 0.634739C2.42182 0.634739 2.35316 0.667273 2.30254 0.725182C2.25192 0.783092 2.22348 0.861635 2.22348 0.943531C2.22348 1.02543 2.25192 1.10397 2.30254 1.16188C2.35316 1.21979 2.42182 1.25232 2.49341 1.25232ZM5.53271 1.25232C5.60431 1.25232 5.67296 1.21979 5.72359 1.16188C5.77421 1.10397 5.80265 1.02543 5.80265 0.943531C5.80265 0.861635 5.77421 0.783092 5.72359 0.725182C5.67296 0.667273 5.60431 0.634739 5.53271 0.634739C5.46112 0.634739 5.39246 0.667273 5.34184 0.725182C5.29122 0.783092 5.26278 0.861635 5.26278 0.943531C5.26278 1.02543 5.29122 1.10397 5.34184 1.16188C5.39246 1.21979 5.46112 1.25232 5.53271 1.25232ZM3.55817 1.94425C3.55817 1.86235 3.52973 1.78381 3.47911 1.7259C3.42848 1.66799 3.35982 1.63545 3.28823 1.63545C3.21664 1.63545 3.14798 1.66799 3.09736 1.7259C3.04673 1.78381 3.01829 1.86235 3.01829 1.94425C3.01829 2.02614 3.04673 2.10469 3.09736 2.1626C3.14798 2.2205 3.21664 2.25304 3.28823 2.25304C3.35982 2.25304 3.42848 2.2205 3.47911 2.1626C3.52973 2.10469 3.55817 2.02614 3.55817 1.94425ZM5.00284 1.94425C5.00284 1.86235 4.9744 1.78381 4.92377 1.7259C4.87315 1.66799 4.80449 1.63545 4.7329 1.63545C4.66131 1.63545 4.59265 1.66799 4.54202 1.7259C4.4914 1.78381 4.46296 1.86235 4.46296 1.94425C4.46296 2.02614 4.4914 2.10469 4.54202 2.1626C4.59265 2.2205 4.66131 2.25304 4.7329 2.25304C4.80449 2.25304 4.87315 2.2205 4.92377 2.1626C4.9744 2.10469 5.00284 2.02614 5.00284 1.94425ZM4.283 0.943531C4.283 0.861635 4.25456 0.783092 4.20394 0.725182C4.15332 0.667273 4.08466 0.634739 4.01306 0.634739C3.94147 0.634739 3.87281 0.667273 3.82219 0.725182C3.77157 0.783092 3.74313 0.861635 3.74313 0.943531C3.74313 1.02543 3.77157 1.10397 3.82219 1.16188C3.87281 1.21979 3.94147 1.25232 4.01306 1.25232C4.08466 1.25232 4.15332 1.21979 4.20394 1.16188C4.25456 1.10397 4.283 1.02543 4.283 0.943531ZM6.29754 16H1.7036C0.653838 16 -0.150976 14.9192 0.0239833 13.7355L1.2437 5.35239H1.28119L1.2437 5.34668V3.80958H6.76243V5.34668L6.72544 5.35239H6.75743L7.97715 13.7298C8.14711 14.9192 7.3473 16 6.29754 16ZM5.85264 9.06934H2.14849C1.95854 9.06934 1.79358 9.22945 1.76358 9.44103L1.21871 13.1808C1.09874 14.01 1.65861 14.7648 2.39344 14.7648H5.6077C6.34253 14.7648 6.9024 14.01 6.78243 13.1808L6.23755 9.44103C6.22126 9.3375 6.17389 9.24372 6.10363 9.17587C6.03336 9.10801 5.94459 9.07034 5.85264 9.06934Z" fill="#203027"/>
+          </svg></span>
+          <span class="logo-text">addSalt</span>
+        </a>
+      </div>
+
+      <div class="nav" id="navMenu">
+        <a href="index.php">Home</a>
+        <a href="all-recipes.php" class="active">Recipes</a>
+        <a href="#">Login</a>
+      </div>
+      
+      <button class="menu-button" id="menuButton">
+          <svg class="menu-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3.66748 4.58258H18.3327M3.66748 11H18.3327M3.66748 17.4174H18.3327" stroke="#F7F1E4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+
+          <svg class="close-icon" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19.5 19.5L13 13M13 13L6.5 6.5M13 13L19.5 6.5M13 13L6.5 19.5" stroke="#F7F1E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </button>
+      </div>
+    </header>
+
+    <h1 class="all-recipes-title">All Recipes</h1>
+
+    <section class="recipes">
+      <div class="recipes-section">
+        <div class="categories">
+        <div class="category-heading">
+            <h4>Explore by category</h4>
+        </div>
+
+        <div class="category-list">
+            <a href="all-recipes.php#recipes" class="<?php echo $category === '' ? 'active' : ''; ?>"><!-- AI-generated: This code was generated by ChatGPT to keep the selected category highlighted and jump to the recipes section after clicking. -->
+            <svg width="20" height="20" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 2.25H6.75C7.16421 2.25 7.5 2.58579 7.5 3V6.75C7.5 7.16421 7.16421 7.5 6.75 7.5H3C2.58579 7.5 2.25 7.16421 2.25 6.75V3C2.25 2.58579 2.58579 2.25 3 2.25ZM11.25 2.25H15C15.4142 2.25 15.75 2.58579 15.75 3V6.75C15.75 7.16421 15.4142 7.5 15 7.5H11.25C10.8358 7.5 10.5 7.16421 10.5 6.75V3C10.5 2.58579 10.8358 2.25 11.25 2.25ZM11.25 10.5H15C15.4142 10.5 15.75 10.8358 15.75 11.25V15C15.75 15.4142 15.4142 15.75 15 15.75H11.25C10.8358 15.75 10.5 15.4142 10.5 15V11.25C10.5 10.8358 10.8358 10.5 11.25 10.5ZM3 10.5H6.75C7.16421 10.5 7.5 10.8358 7.5 11.25V15C7.5 15.4142 7.16421 15.75 6.75 15.75H3C2.58579 15.75 2.25 15.4142 2.25 15V11.25C2.25 10.8358 2.58579 10.5 3 10.5Z" stroke-width="1.8" stroke-linecap="round" stroke="#355E45"/>
+            </svg>All recipes
+            <span class="recipe-number"><?php echo e((string) $total); ?></span>
+            </a>
+            
+            <a href="all-recipes.php?category=Meat#recipes"  class="<?php echo $category === 'Meat' ? 'active' : ''; ?>">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.30375 11.8212C6.73526 12.6137 7.38632 13.2647 8.17875 13.6962L6.25 15.625V17.5C6.25 17.8315 6.1183 18.1495 5.88388 18.3839C5.64946 18.6183 5.33152 18.75 5 18.75C4.66848 18.75 4.35054 18.6183 4.11612 18.3839C3.8817 18.1495 3.75 17.8315 3.75 17.5V16.25H2.5C2.16848 16.25 1.85054 16.1183 1.61612 15.8839C1.3817 15.6495 1.25 15.3315 1.25 15C1.25 14.6685 1.3817 14.3505 1.61612 14.1161C1.85054 13.8817 2.16848 13.75 2.5 13.75H4.375L6.30375 11.8212ZM10.76 1.08375C12.0162 0.893745 14.61 0.858745 16.875 3.125C19.14 5.38875 19.1075 7.9825 18.9175 9.23875C18.8412 9.74125 18.5312 10.1637 18.125 10.4687L17.02 11.2975C15.9908 12.0686 14.8107 12.6141 13.5565 12.8984C12.3023 13.1827 11.0023 13.1994 9.74125 12.9475C9.07758 12.8151 8.46801 12.4891 7.98947 12.0105C7.51094 11.532 7.1849 10.9224 7.0525 10.2587C6.80041 8.99748 6.81706 7.69723 7.10136 6.44283C7.38567 5.18844 7.93125 4.00807 8.7025 2.97875L9.53125 1.875C9.83625 1.4675 10.2575 1.16 10.76 1.08375ZM16.035 4.2675C15.06 3.2925 13.8725 2.895 13.3837 3.38375C12.8962 3.87125 13.2912 5.05875 14.2675 6.03375C15.2425 7.01125 16.43 7.4075 16.9187 6.92C17.4062 6.4325 17.0113 5.24375 16.035 4.2675Z" fill="#355E45"/>
+            </svg>Meat
+            <span class="recipe-number"><?php echo e((string) $meat_count); ?></span>
+            </a>
+
+            <a href="all-recipes.php?category=Seafood#recipes" class="<?php echo $category === 'Seafood' ? 'active' : ''; ?>">
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.13013 2.56851C10.0195 -0.320901 14.4242 -0.772509 17.7863 1.21369C19.7725 4.57663 19.3209 8.98046 16.4315 11.8699C15.3253 12.9764 13.9432 13.7667 12.4285 14.159C10.9139 14.5513 9.32187 14.5311 7.81763 14.1007L7.44056 19L0 11.5594L4.89928 11.1824C4.46885 9.67813 4.44873 8.08611 4.841 6.57147C5.23327 5.05682 6.02364 3.67472 7.13013 2.56851ZM15.5011 8.10179C14.2801 8.10179 13.1091 7.61676 12.2457 6.75338C11.3824 5.89001 10.8973 4.71902 10.8973 3.49803H9.58197C9.58197 5.06788 10.2056 6.57343 11.3156 7.68348C12.4257 8.79354 13.9312 9.41716 15.5011 9.41716V8.10179ZM12.7108 3.80846L13.9516 2.56851L15.1915 3.80846L13.9516 5.04928L12.7108 3.80846Z" fill="#355E45"/>
+            </svg>Seafood
+            <span class="recipe-number"><?php echo e((string) $seafood_count); ?></span>
+            </a>
+
+            <a href="all-recipes.php?category=Vegetarian#recipes" class="<?php echo $category === 'Vegetarian' ? 'active' : ''; ?>">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_34_45)">
+            <path d="M7.2004 11.6668L5.49208 9.96669M12.7837 12.5002L10.7337 10.4501M12.5008 7.4998C12.5008 7.4998 14.0508 5.833 15.4174 5.833C17.2258 5.833 18.3341 7.4998 18.3341 7.4998C18.3341 7.4998 17.2258 9.1666 15.4174 9.1666C13.6091 9.1666 12.5008 7.4998 12.5008 7.4998ZM12.5008 7.4998C12.5008 7.4998 10.8341 6.39138 10.8341 4.5829C10.8341 2.77442 12.5008 1.666 12.5008 1.666C12.5008 1.666 14.1674 2.77442 14.1674 4.5829C14.1674 5.96634 12.5008 7.4998 12.5008 7.4998ZM1.89209 18.084C1.89209 18.084 10.1171 15.1671 12.5004 12.7836C12.8489 12.4355 13.1255 12.0223 13.3144 11.5673C13.5032 11.1124 13.6006 10.6247 13.601 10.1321C13.6014 9.63957 13.5048 9.15174 13.3166 8.69651C13.1285 8.24128 12.8526 7.82757 12.5046 7.47899C12.1566 7.13041 11.7433 6.8538 11.2884 6.66494C10.8335 6.47608 10.3459 6.37868 9.85334 6.37829C9.36081 6.3779 8.87302 6.47454 8.41783 6.66268C7.96263 6.85083 7.54895 7.12679 7.2004 7.47482C4.80875 9.86668 1.89209 18.084 1.89209 18.084Z" stroke="#355E45" stroke-width="1.8" stroke-linecap="round"/>
+            </g><defs><clipPath id="clip0_34_45"><rect width="20" height="20" fill="white"/></clipPath></defs>
+            </svg>Vegetarian
+            <span class="recipe-number"><?php echo e((string) $vegetarian_count); ?></span>
+            </a>
+        </div>
+        </div>
+
+        <div class="recipe-list">
+        <?php foreach ($recipes as $recipe): ?>
+            <a class="recipe-link" href="recipe.php?id=<?php echo e((string) $recipe['id']); ?>">
+            <article class="recipe-card">
+            <div class="recipe-image">
+                <img src="<?php echo e($recipe['main_image']); ?>" alt="<?php echo e($recipe['title']); ?>">
+                <span><?php echo e($recipe['category']); ?></span>
+            </div>
+
+            <div class="recipe-content">
+                <h3><?php echo e($recipe['title']); ?></h3>
+                <p><?php echo e($recipe['subtitle']); ?></p>
+            </div>
+            </article>
+            </a>
+        <?php endforeach; ?>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+        <a class="footer-brand" href="index.php">addSalt</a>
+        <p>&copy; 2026 addSalt. All rights reserved.</p>
+    </footer>
+</body>
+</html>
