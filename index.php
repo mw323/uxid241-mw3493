@@ -52,11 +52,11 @@ foreach ($category_counts as $category_count) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>addSalt</title>
-  <link rel="stylesheet" href="normalize.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addSalt</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -74,7 +74,7 @@ foreach ($category_counts as $category_count) {
       <div class="nav" id="navMenu">
         <a href="index.php" class="active">Home</a>
         <a href="all-recipes.php">Recipes</a>
-        <a href="#">Login</a>
+        <a href="login.php">Login</a>
       </div>
       
       <button class="menu-button" id="menuButton">
@@ -171,7 +171,7 @@ foreach ($category_counts as $category_count) {
           </g><defs><clipPath id="clip0_34_45"><rect width="20" height="20" fill="white"/></clipPath></defs>
           </svg>Vegetarian
           <span class="recipe-number"><?php echo e((string) $vegetarian_count); ?></span>
-</a>
+        </a>
       </div>
     </div>
 
