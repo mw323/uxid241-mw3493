@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+function get_post(string $key): string {
+  return trim($_POST[$key] ?? '');
+}
+
 function all_recipes(mysqli $conn): array {
     $sql = 'SELECT recipes.id, recipes.title, recipes.subtitle, recipes.main_image, categories.name AS category
         FROM recipes
