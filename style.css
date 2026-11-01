@@ -645,6 +645,137 @@ body{
     font-weight: 400;
 }
 
+.login-page{
+    background-color: #ffffff;
+}
+
+.login-header{
+    padding: 32px 48px;
+}
+
+.login-logo{
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    color: #203027;
+    text-decoration: none;
+    font-family: var(--font-main);
+}
+
+.login-logo-icon{
+    display: flex;
+    align-items: center;
+}
+
+.login-logo-icon svg{
+    width: 12px;
+    height: 24px;
+}
+
+.login-logo-text{
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.login-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 24px;
+}
+
+.login-main h1{
+    margin: 0 0 15px;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    font-family: var(--font-main);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.login-subtitle{
+    margin: 0 0 30px;
+    color: #697168;
+    font-size: 18px;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+}
+
+.login-card{
+    width: 100%;
+    max-width: 430px;
+    padding: 36px;
+    background-color: #ffffff;
+    border: 1px solid #eeeeea;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(32, 48, 39, 0.1);
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    font-family: var(--font-secondary);
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.form-group input{
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid #c9cbc4;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #203027;
+    font-size: 16px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #355e45;
+    box-shadow: 0 0 0 2px rgba(53, 94, 69, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #a1a59f;
+}
+
+.login-button{
+    width: 100%;
+    height: 46px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 24px;
+    background-color: #355e45;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.login-button:hover{
+    background-color: #2b4436;
+}
+
+.login-error{
+    margin: 0 0 24px;
+    color: #b94b3c;
+    font-size: 16px;
+    text-align: center;
+}
+
 @media (max-width: 1200px){
     .navigation{
         padding: 1.5rem 60px;
