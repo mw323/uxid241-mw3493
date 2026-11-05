@@ -14,5 +14,6 @@ declare(strict_types=1);
 
 <body>
     <h1>Login successful!</h1>
+    <a href="../logout.php">Log Out</a>
 </body>
 </html>
