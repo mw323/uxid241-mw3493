@@ -80,6 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <button type="submit" class="login-button">Log in</button>
             </form>
+
+            <h3>New to addSalt?<a href="register.php">Create an account</a></h3>
+            
         </div>
     </div>
 </body>
