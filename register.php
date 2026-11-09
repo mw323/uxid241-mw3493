@@ -11,6 +11,7 @@ function e(string $value): string {
 
 $error = '';
 
+// AI: ChatGPT helped add registration validation and duplicate email checking.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = get_post('email');
     $plain = get_post('password');
