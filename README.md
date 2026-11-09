@@ -15,7 +15,9 @@ This project is an online cookbook where users can browse, search, and filter di
 
 ## Admin login
 
-To access the admin area, you can create your own account through the Create an Account page or use the test account below:
+To access the admin area, you can create your own account through the **Create an Account** page. Enter your email address, create a password, and enter the same password again to confirm it. After creating your account, you can log in with your email and password to access the admin area.
+
+You can also use the test account below:
 
 - Email: admin@example.com
 - Password: test123
