@@ -787,12 +787,12 @@ body{
     outline: none;
 }
 
-.form-group input:focus {
+.form-group input:focus{
     border-color: #355e45;
     box-shadow: 0 0 0 2px rgba(53, 94, 69, 0.1);
 }
 
-.form-group input::placeholder {
+.form-group input::placeholder{
     color: #a1a59f;
 }
 
@@ -907,7 +907,7 @@ body{
     gap: 40px;
 }
 
-.manage-recipes-header .all-recipes-title {
+.manage-recipes-header .all-recipes-title{
     margin: 0;
     text-align: left;
 }
