@@ -106,3 +106,8 @@ function add_steps(mysqli $conn, int $recipe_id, array $step_titles, array $step
         mysqli_execute_query($conn, $sql, [$recipe_id, $step_number, $step_titles[$i], $step_descriptions[$i], $step_images[$i]]);
     }
 }
+
+/* Delete recipe function */
+function delete_recipe(mysqli $conn, int $id): void {
+    mysqli_execute_query($conn, 'DELETE FROM recipes WHERE id = ?', [$id]);
+}
