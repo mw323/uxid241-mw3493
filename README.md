@@ -15,7 +15,7 @@ This project is an online cookbook where users can browse, search, and filter di
 
 ## Admin login
 
-The account registration feature is not fully completed at the beta stage. Please use the test account below to log in and access the admin area:
+To access the admin area, you can create your own account through the Create an Account page or use the test account below:
 
 - Email: admin@example.com
 - Password: test123
