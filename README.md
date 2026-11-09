@@ -22,7 +22,7 @@ To access the admin area, you can create your own account through the Create an 
 
 ## Feature
 
-I built both Search and Filter features to help users find recipes more easily. The Search feature allows users to enter a keyword to find recipes by their title or subtitle. The Filter feature allows users to select a recipe category, such as Meat, Seafood, or Vegetarian, to only display recipes from that category. Users can also select “All Recipes” to view the full recipe collection.
+For the required beta feature, I built Search. I also added a category filter as an additional feature. The Search feature allows users to enter a keyword to find recipes by their title or subtitle. The filter feature allows users to select a recipe category, such as Meat, Seafood, or Vegetarian, to only display recipes from that category. Users can also select “All Recipes” to view the full recipe collection.
 
 ## Add recipe: Image Upload
 
