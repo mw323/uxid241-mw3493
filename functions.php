@@ -90,6 +90,7 @@ function create_recipe(mysqli $conn, string $title, string $subtitle, string $de
     return (int) mysqli_insert_id($conn);
 }
 
+// AI-generated with ChatGPT //
 function add_ingredients(mysqli $conn, int $recipe_id, array $ingredients): void {
     $sort_order = 1;
     foreach ($ingredients as $ingredient) {
@@ -99,6 +100,7 @@ function add_ingredients(mysqli $conn, int $recipe_id, array $ingredients): void
     }
 }
 
+// AI-generated with ChatGPT //
 function add_steps(mysqli $conn, int $recipe_id, array $step_titles, array $step_descriptions, array $step_images): void {
     for ($i = 0; $i < count($step_titles); $i++) {
         $step_number = $i + 1;
