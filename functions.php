@@ -54,7 +54,7 @@ function recipes_by_category(mysqli $conn, string $category): array {
 /* recipe detail page */
 function recipe_by_id(mysqli $conn, int $id): array {
     $sql = 'SELECT recipes.id, recipes.title, recipes.subtitle, recipes.description, 
-            recipes.main_image, recipes.ingredients_image, categories.name AS category
+            recipes.main_image, recipes.ingredients_image, recipes.category_id, categories.name AS category
             FROM recipes
             INNER JOIN categories ON recipes.category_id = categories.id
             WHERE recipes.id = ?';
@@ -64,7 +64,7 @@ function recipe_by_id(mysqli $conn, int $id): array {
 }
 
 function ingredients_by_recipe(mysqli $conn, int $recipe_id): array {
-    $sql = 'SELECT ingredient
+    $sql = 'SELECT ingredient, sort_order
             FROM ingredients
             WHERE recipe_id = ?
             ORDER BY sort_order';
@@ -110,4 +110,22 @@ function add_steps(mysqli $conn, int $recipe_id, array $step_titles, array $step
 /* Delete recipe function */
 function delete_recipe(mysqli $conn, int $id): void {
     mysqli_execute_query($conn, 'DELETE FROM recipes WHERE id = ?', [$id]);
+}
+
+/* Update recipe function */
+function update_recipe(mysqli $conn, int $id, string $title, string $subtitle, string $description, string $main_image, string $ingredients_image, int $category_id): void {
+    $sql = 'UPDATE recipes SET title = ?, subtitle = ?, description = ?, main_image = ?, ingredients_image = ?, category_id = ? WHERE id = ?';
+    mysqli_execute_query($conn, $sql, [$title, $subtitle, $description, $main_image, $ingredients_image, $category_id, $id]);
+}
+
+/* Update ingredients */
+function update_ingredient(mysqli $conn, int $recipe_id, int $sort_order, string $ingredient): void {
+    $sql = 'UPDATE ingredients SET ingredient = ? WHERE recipe_id = ? AND sort_order = ?';
+    mysqli_execute_query($conn, $sql, [$ingredient, $recipe_id, $sort_order]);
+}
+
+/* Update steps */
+function update_step(mysqli $conn, int $recipe_id, int $step_number, string $title, string $description, string $step_image): void {
+    $sql = 'UPDATE steps SET title = ?, description = ?, step_image = ? WHERE recipe_id = ? AND step_number = ?';
+    mysqli_execute_query($conn, $sql, [$title, $description, $step_image, $recipe_id, $step_number]);
 }
