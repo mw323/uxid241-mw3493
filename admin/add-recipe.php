@@ -30,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $step_descriptions = $_POST['step_descriptions'] ?? [];
     $step_images = $_POST['step_images'] ?? [];
 
-    if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id === 0 || empty($ingredients) || empty($step_titles)) {
+    if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id === 0 || empty($ingredients) || empty($step_titles) ||
+    empty($step_descriptions) || empty($step_images)){
         $error = 'Please complete all required fields.';
     }else {
         $recipe_id = create_recipe($conn, $title, $subtitle, $description, $main_image, $ingredients_image, $category_id);
