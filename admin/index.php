@@ -184,6 +184,13 @@ foreach ($category_counts as $category_count) {
       </div>
 
       <div class="recipe-list">
+        <?php if (empty($recipes)): ?>
+          <div class="no-results">
+            <h3>Uh-oh! No recipes found</h3>
+            <p>Try searching for something else</p>
+          </div>
+        <?php endif; ?>
+        
         <?php foreach ($recipes as $recipe): ?>
           <a class="recipe-link" href="recipe.php?id=<?php echo e((string) $recipe['id']); ?>">
           <article class="recipe-card">
