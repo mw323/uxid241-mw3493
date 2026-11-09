@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2026 at 07:48 PM
+-- Generation Time: Nov 09, 2026 at 09:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.4.25
 
@@ -487,7 +487,10 @@ INSERT INTO `ingredients` (`recipe_id`, `ingredient`, `sort_order`) VALUES
 (40, '1 Tbsp Capers', 9),
 (40, '1 Tbsp Apple Cider Vinegar', 10),
 (40, '2 Tbsps Crumbled Goat Cheese', 11),
-(40, '1 Tbsp Tuscan Spice Blend (Ground Fennel Seeds, Whole Fennel Seeds, Ground Rosemary, & Ground Sage)', 12);
+(40, '1 Tbsp Tuscan Spice Blend (Ground Fennel Seeds, Whole Fennel Seeds, Ground Rosemary, & Ground Sage)', 12),
+(41, '2 Boneless Chicken Breasts', 1),
+(41, '2 Tbsp Honey', 2),
+(41, '2 Cloves Garlic', 3);
 
 -- --------------------------------------------------------
 
@@ -549,7 +552,8 @@ INSERT INTO `recipes` (`id`, `title`, `subtitle`, `description`, `main_image`, `
 (37, 'Togarashi Chicken Lettuce Cups', 'with Orange & Radishes', 'This recipe has been approved by Whole30®. To learn more about their guidelines, visit Whole30.com. We\'re partnering with Whole30® to bring you the first of eight weeks of delicious recipes. These chicken lettuce cups get their dynamic flavor from togarashi seasoning—a staple of Japanese cuisine. Juicy bites of orange add more bright flavor and color.', 'images/togarashi-chicken-lettuce-cups/dish.jpg', 'images/togarashi-chicken-lettuce-cups/ingredients.png', 1),
 (38, 'Top Chef Ginger-Marinated Grassfed Steaks', 'with Stir-Fried Vegetables & Jasmine Rice', 'In this recipe—inspired by our Quickfire Challenge from Top Chef Season 15 on Bravo—we\'re marinating grassfed steaks in fresh ginger, soy sauce, and citrusy ponzu sauce. The extra marinade transforms into an easy pan sauce, which adds punchy flavor to the steaks and a side of jasmine rice.', 'images/top-chef-ginger-marinated-grassfed-steaks/dish.jpg', 'images/top-chef-ginger-marinated-grassfed-steaks/ingredients.png', 1),
 (39, 'Top Chef Seared Grassfed Steaks', 'with Sweet Chili-Glazed Vegetables', 'In this recipe, inspired by our Quickfire Challenge from Top Chef Season 15 on Bravo, simple grassfed steaks and rice get a sweet, tart, and spicy lift from glazed mushrooms and bok choy. Sliced radishes, softened a bit with lime juice, finish the dish off with subtle crunch.', 'images/top-chef-seared-grassfed-steaks/dish.jpg', 'images/top-chef-seared-grassfed-steaks/ingredients.png', 1),
-(40, 'Tuscan Chicken & Green Lentil Stew', 'with Goat Cheese', 'In this comforting cold-weather recipe, we\'re serving Tuscan-spiced chicken over tender green lentils and vegetables cooked in a light, savory tomato broth. Capers and crushed red pepper add briny flavor and a touch of heat to cut through the rich, earthy stew. (Chefs, rinsing the lentils after cooking removes excess starch, resulting in a more delicate flavor.)', 'images/tuscan-chicken-green-lentil-stew/dish.jpg', 'images/tuscan-chicken-green-lentil-stew/ingredients.png', 1);
+(40, 'Tuscan Chicken & Green Lentil Stew', 'with Goat Cheese', 'In this comforting cold-weather recipe, we\'re serving Tuscan-spiced chicken over tender green lentils and vegetables cooked in a light, savory tomato broth. Capers and crushed red pepper add briny flavor and a touch of heat to cut through the rich, earthy stew. (Chefs, rinsing the lentils after cooking removes excess starch, resulting in a more delicate flavor.)', 'images/tuscan-chicken-green-lentil-stew/dish.jpg', 'images/tuscan-chicken-green-lentil-stew/ingredients.png', 1),
+(41, 'Honey Garlic Chicken', 'with Roasted Broccoli & Rice', 'Juicy chicken coated in a sweet and savory honey garlic sauce, served with roasted broccoli and fluffy rice.', 'images/recipe-placeholder.png', 'images/ingredient-placeholder.png', 1);
 
 -- --------------------------------------------------------
 
@@ -805,7 +809,10 @@ INSERT INTO `steps` (`recipe_id`, `step_number`, `title`, `description`, `step_i
 (40, 3, 'Cook the chicken', 'While the lentils continue to cook, pat the chicken dry with paper towels; season on both sides with salt, pepper, and half the spice blend. In a large pan, heat 2 teaspoons of olive oil on medium-high until hot. Add the seasoned chicken and cook 5 to 7 minutes per side, or until browned and cooked through. Leaving any browned bits (or fond) in the pan, transfer to a cutting board.', 'images/tuscan-chicken-green-lentil-stew/step-3.jpg'),
 (40, 4, 'Cook the vegetables', 'Add the sliced onion, chopped garlic, and diced carrots to pan of reserved fond; season with salt and pepper. (If the pan seems dry, add 2 teaspoons of olive oil.) Cook on medium-high, stirring frequently, 4 to 5 minutes, or until softened and fragrant. Add the tomato paste, chopped capers, remaining spice blend, and as much of the red pepper flakes as you\'d like, depending on how spicy you\'d like the dish to be. Cook, stirring constantly, 30 seconds to 1 minute, or until dark red and fragrant. Add the chopped collard greens and 2 cups of water; season with salt and pepper. Cook, stirring occasionally and scraping up any fond, 8 to 9 minutes, or until the collard greens have wilted and the liquid has thickened. Turn off the heat.', 'images/tuscan-chicken-green-lentil-stew/step-4.jpg'),
 (40, 5, 'Warm the chicken in the stew', 'Return the cooked chicken (and any juices from the cutting board) to the pan of cooked vegetables, nestling it into the stew. Cook on medium, covered, 2 to 3 minutes, or until the chicken is warmed through. Transfer the chicken back to the cutting board.', 'images/tuscan-chicken-green-lentil-stew/step-5.jpg'),
-(40, 6, 'Slice the chicken & serve your dish', 'Slice the cooked chicken crosswise. Add the cooked lentils and vinegar to the pan of cooked vegetables. Stir to combine. Season with salt and pepper to taste. Serve the finished lentils and vegetables topped with the sliced chicken. Garnish with the cheese. Enjoy!', 'images/tuscan-chicken-green-lentil-stew/step-6.jpg');
+(40, 6, 'Slice the chicken & serve your dish', 'Slice the cooked chicken crosswise. Add the cooked lentils and vinegar to the pan of cooked vegetables. Stir to combine. Season with salt and pepper to taste. Serve the finished lentils and vegetables topped with the sliced chicken. Garnish with the cheese. Enjoy!', 'images/tuscan-chicken-green-lentil-stew/step-6.jpg'),
+(41, 1, 'Prepare the Chicken', 'Season the chicken breasts on both sides with salt and pepper. Pat the chicken dry with a paper towel before seasoning so it cooks evenly and develops a golden surface.', 'images/step-placeholder.png'),
+(41, 2, 'Cook the Chicken', 'Heat a large pan over medium heat and add a small amount of oil. Place the chicken breasts in the pan and cook for about 5–6 minutes on each side, or until golden brown and fully cooked through. Remove the chicken from the pan and set it aside.', 'images/step-placeholder.png'),
+(41, 3, 'Add the Sauce', 'Reduce the heat to medium-low and add the minced garlic to the same pan. Cook for about 30 seconds until fragrant, then stir in the honey and a small splash of water. Return the chicken to the pan and spoon the sauce over it until each piece is evenly coated. Let everything cook together for another 2–3 minutes before serving.', 'images/step-placeholder.png');
 
 -- --------------------------------------------------------
 
@@ -824,7 +831,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password_hash`) VALUES
-(1, 'admin@example.com', '$2y$12$otcHW2Ber49lufwS5Iwl0e7wmEXQN.U01ctsmpAYZ42HpZO/aE2bW');
+(1, 'admin@example.com', '$2y$12$otcHW2Ber49lufwS5Iwl0e7wmEXQN.U01ctsmpAYZ42HpZO/aE2bW'),
+(2, 'abc@example.com', '$2y$12$f3X95f9z7PYS8gRrXJ/UD.2drH.FEMUpSgxRgsy5JjmsO6RflUaY2');
 
 --
 -- Indexes for dumped tables
@@ -876,13 +884,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `recipes`
 --
 ALTER TABLE `recipes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -892,7 +900,7 @@ ALTER TABLE `users`
 -- Constraints for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  ADD CONSTRAINT `fk_recipes_ingredients` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`);
+  ADD CONSTRAINT `fk_recipes_ingredients` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `recipes`
@@ -904,7 +912,7 @@ ALTER TABLE `recipes`
 -- Constraints for table `steps`
 --
 ALTER TABLE `steps`
-  ADD CONSTRAINT `fk_recipes_steps` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`);
+  ADD CONSTRAINT `fk_recipes_steps` FOREIGN KEY (`recipe_id`) REFERENCES `recipes` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
