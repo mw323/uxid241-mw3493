@@ -96,7 +96,7 @@ foreach ($category_counts as $category_count) {
 
         <h1>What are you<br>craving today?</h1>
 
-        <p class="search-description">Search recipes by dish name.</p>
+        <p class="search-description">Search by recipe title or subtitle to find what you're looking for.</p>
 
         <form class="search-bar" action="index.php#recipes" method="get">
 

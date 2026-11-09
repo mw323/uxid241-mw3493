@@ -103,7 +103,7 @@ foreach ($category_counts as $category_count) {
 
         <h1>Manage your<br>recipes collection</h1>
 
-        <p class="search-description">Search recipes by dish name.</p>
+        <p class="search-description">Search by recipe title or subtitle to find what you're looking for.</p>
 
         <form class="search-bar" action="index.php#recipes" method="get">
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
