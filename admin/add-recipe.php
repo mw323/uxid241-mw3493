@@ -182,6 +182,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="step_images[]" placeholder="No image? Use: images/step-placeholder.png" required>          
           </div>
         </div>
+
+        <div class="step-form">
+          <h3>Step 3</h3>
+
+          <div class="form-group">
+            <label>Step Title</label>
+            <input type="text" name="step_titles[]" placeholder="e.g. Cook the ingredients" required>
+          </div>
+
+          <div class="form-group">
+            <label>Instructions</label>
+            <textarea name="step_descriptions[]" placeholder="Describe what to do in this step." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Step Image</label>
+            <input type="text" name="step_images[]" placeholder="No image? Use: images/step-placeholder.png" required>          
+          </div>
+        </div>
       </div>
 
       <button type="button" class="add-field-button" id="addStep">+ Add Step</button>
