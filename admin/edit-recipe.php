@@ -40,15 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $step_descriptions = $_POST['step_descriptions'] ?? [];
     $step_images = $_POST['step_images'] ?? [];
 
-    if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id === 0) {
+    if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id === 0 || empty($new_ingredients) ||
+    empty($step_titles) || empty($step_descriptions) || empty($step_images)) {
         $error = 'Please complete all required fields.';
     }else {
         update_recipe($conn, $id, $title, $subtitle, $description, $main_image, $ingredients_image, $category_id);
 
+        // AI-generated with ChatGPT
         for ($i = 0; $i < count($new_ingredients); $i++) {
             update_ingredient($conn, $id, (int) $ingredient_orders[$i], $new_ingredients[$i]);
         }
 
+        // AI-generated with ChatGPT
         for ($i = 0; $i < count($step_titles); $i++) {
             update_step($conn, $id, (int) $step_numbers[$i], $step_titles[$i], $step_descriptions[$i], $step_images[$i]);
         }
@@ -147,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php foreach ($ingredients as $ingredient): ?>
           <div class="ingredient-row">
             <span><?php echo (int) $ingredient['sort_order']; ?></span>
-            <input type="hidden" name="ingredient_orders[]" value="<?php echo (int) $ingredient['sort_order']; ?>">
+            <input type="hidden" name="ingredient_orders[]" value="<?php echo (int) $ingredient['sort_order']; ?>"> <!-- Added with ChatGPT's help to keep track of each ingredient's sort order -->
             <input type="text" name="ingredients[]" value="<?php echo e($ingredient['ingredient']); ?>" required>
           </div>
         <?php endforeach; ?>
