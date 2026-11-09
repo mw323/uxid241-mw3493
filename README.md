@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project is an online cookbook designed to provide a simple way to browse and manage a collection of recipes. It is a server-side web application built with PHP and a database, with features for browsing, searching, filtering, and managing recipe information. The project brings together the PHP and database skills developed throughout the course into a complete web application.
+This project is an online cookbook where users can browse, search, and filter different recipes. Each recipe includes information such as the recipe description, ingredients, images, and cooking steps. The website is built with PHP and a database to store and display the recipe information. At the beta stage, users can log in to access the admin area and manage the recipe collection. From the admin area, users can add new recipes, update existing recipe information, and delete recipes from the database.
 
 ## How to run it locally?
 
@@ -12,6 +12,17 @@ This project is an online cookbook designed to provide a simple way to browse an
 4. Copy `config.example.php` to `config.php`.
 5. Update `config.php` with your local database credentials and database name.
 6. Open the project through `localhost` in your web browser.
+
+## Admin login
+
+The account registration feature is not fully completed at the beta stage. Please use the test account below to log in and access the admin area:
+
+- Email: admin@example.com
+- Password: test123
+
+## Feature
+
+I built both Search and Filter features to help users find recipes more easily. The Search feature allows users to enter a keyword to find recipes by their title or subtitle. The Filter feature allows users to select a recipe category, such as Meat, Seafood, or Vegetarian, to only display recipes from that category. Users can also select “All Recipes” to view the full recipe collection.
 
 ## AI use
 
