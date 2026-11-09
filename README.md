@@ -30,3 +30,11 @@ This project is an online cookbook designed to provide a simple way to browse an
 - ChatGPT — I asked ChatGPT how to make the category links jump to the recipes section while showing the selected category as active, with “All Recipes” active by default. ChatGPT generated the PHP code using a ternary operator to conditionally apply the `active` class based on the selected category. ChatGPT also explained how this code works: if the condition before the `?` is true, it returns the value after the `?`; otherwise, it returns the value after the `:`.
 
 - ChatGPT — I used ChatGPT to help me plan how to organize recipe content in the database and connect multiple tables using foreign keys. 
+
+- ChatGPT — I used ChatGPT to help generate the add_ingredients() and add_steps() functions for the Create Recipe feature. Before using the code, I asked ChatGPT to explain how each function works and provide examples to help me better understand the loops and how the data is added to the database.
+
+- ChatGPT — I used ChatGPT to help generate the `for` loops for updating multiple ingredients and steps in the Edit Recipe feature. Before using the code, I asked ChatGPT to explain how the loops work and provide examples to help me understand how the index matches and updates the correct ingredient and step data.
+
+- ChatGPT — I shared my Edit Recipe code with ChatGPT, and it pointed out that I was missing a hidden input for keeping track of each ingredient's sort order. ChatGPT explained why it was needed and how it works with the update loop, so I added it to my form.
+
+- ChatGPT — I asked ChatGPT how to better manage multiple ingredient and step inputs in the Create Recipe form. It suggested using arrays such as ingredients[], step_titles[], step_descriptions[], and step_images[], and explained how the values are grouped and submitted to PHP.
