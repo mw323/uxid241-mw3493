@@ -24,6 +24,16 @@ The account registration feature is not fully completed at the beta stage. Pleas
 
 I built both Search and Filter features to help users find recipes more easily. The Search feature allows users to enter a keyword to find recipes by their title or subtitle. The Filter feature allows users to select a recipe category, such as Meat, Seafood, or Vegetarian, to only display recipes from that category. Users can also select “All Recipes” to view the full recipe collection.
 
+## Add recipe: Image Upload
+
+Image upload is not fully developed at the beta stage. For testing, please use the prepared placeholders:
+
+- Recipe: images/recipe-placeholder.png
+- Ingredients: images/ingredient-placeholder.png
+- Step: images/step-placeholder.png
+
+The image upload feature will be developed further for the final version.
+
 ## AI use
 
 - ChatGPT — I asked how to keep “Difficulty” and “Duration” displayed as the default text in my select boxes without showing them as options when the dropdown is opened. ChatGPT showed me how to use `value=""`, `disabled`, `selected`, and `hidden` and explained what each one does. After understanding the explanation, I applied them to my own HTML.
