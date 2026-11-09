@@ -361,6 +361,7 @@ body{
     font-family: var(--font-main);
     font-size: 36px;
     font-weight: 400;
+    color: var(--secondary-color);
 }
 
 .no-results p{
@@ -820,6 +821,22 @@ body{
     text-align: center;
 }
 
+.register-text{
+   font-family: var(--font-secondary);
+   margin: 20px 0 0;
+}
+
+.register-text a{
+    margin-left: 10px;
+    text-decoration: underline;
+    color: var(--tag-text-color);
+    transition: color 0.3s ease-in-out;
+}
+
+.register-text a:hover{
+    color: var(--secondary-color);
+}
+
 .admin-recipes-heading{
     display:grid;
     grid-template-columns: 1fr auto;
@@ -841,7 +858,9 @@ body{
     border-radius: 6px;
     font-size: 16px;
     text-decoration: none;
-    transition: 0.2s ease;
+    transition: 
+        background-color 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .manage-recipes-button:hover{
