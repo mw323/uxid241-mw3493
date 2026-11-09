@@ -61,3 +61,5 @@ The image upload feature will be developed further for the final version.
 - ChatGPT — I shared my Edit Recipe code with ChatGPT, and it pointed out that I was missing a hidden input for keeping track of each ingredient's sort order. ChatGPT explained why it was needed and how it works with the update loop, so I added it to my form.
 
 - ChatGPT — I asked ChatGPT how to better manage multiple ingredient and step inputs in the Create Recipe form. It suggested using arrays such as ingredients[], step_titles[], step_descriptions[], and step_images[], and explained how the values are grouped and submitted to PHP.
+
+- ChatGPT — I created a registration page based on my existing login layout and asked ChatGPT for help improving the registration functionality. ChatGPT helped me add password confirmation, check for duplicate email addresses, and complete the account creation process using password hashing and a prepared statement.
