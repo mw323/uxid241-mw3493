@@ -23,13 +23,14 @@ $ingredients = ingredients_by_recipe($conn, $id);
 $steps = steps_by_recipe($conn, $id);
 
 $error = '';
+$upload_folder = __DIR__ . '/../images';
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = get_post('title');
     $subtitle = get_post('subtitle');
     $description = get_post('description');
-    $main_image = get_post('main_image');
-    $ingredients_image = get_post('ingredients_image');
     $category_id = (int) get_post('category_id');
 
     $ingredient_orders = $_POST['ingredient_orders'] ?? [];
@@ -38,12 +39,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $step_numbers = $_POST['step_numbers'] ?? [];
     $step_titles = $_POST['step_titles'] ?? [];
     $step_descriptions = $_POST['step_descriptions'] ?? [];
-    $step_images = $_POST['step_images'] ?? [];
 
-    if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id < 1 || $category_id > 3 || empty($new_ingredients) ||
-    empty($step_titles) || empty($step_descriptions) || empty($step_images)) {
+    $main_image = $recipe['main_image'];
+    $ingredients_image = $recipe['ingredients_image'];
+
+    $step_images = [];
+
+    foreach ($steps as $step) {
+        $step_images[] = $step['step_image'];
+    }
+
+    if ($_FILES['main_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+        try {
+            $main_image = 'images/' . save_upload(
+                $_FILES['main_image']['tmp_name'],
+                $_FILES['main_image']['name'],
+                $_FILES['main_image']['size'],
+                $_FILES['main_image']['error'],
+                $upload_folder
+            );
+        } catch (RuntimeException $e) {
+            $error = $e->getMessage();
+        }
+      }
+
+    if ($_FILES['ingredients_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+        try {
+            $ingredients_image = 'images/' . save_upload(
+                $_FILES['ingredients_image']['tmp_name'],
+                $_FILES['ingredients_image']['name'],
+                $_FILES['ingredients_image']['size'],
+                $_FILES['ingredients_image']['error'],
+                $upload_folder
+            );
+        } catch (RuntimeException $e) {
+            $error = $e->getMessage();
+        }
+      }
+
+    if (isset($_FILES['step_images']['name']) && is_array($_FILES['step_images']['name'])) {
+        $files = $_FILES['step_images'];
+
+        foreach ($files['name'] as $i => $original_name) {
+            if ($files['error'][$i] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+            try {
+                $saved = save_upload(
+                    $files['tmp_name'][$i],
+                    $original_name,
+                    $files['size'][$i],
+                    $files['error'][$i],
+                    $upload_folder
+                );
+
+                $step_images[$i] = 'images/' . $saved;
+            } catch (RuntimeException $e) {
+                $error = $e->getMessage();
+            }
+        }
+      }
+
+
+     if ($error === '' && ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' ||
+    $category_id < 1 || $category_id > 3 || empty($new_ingredients) || empty($step_titles) || empty($step_descriptions) || empty($step_images))) {
         $error = 'Please complete all required fields.';
-    }else {
+    }
+    
+    if ($error === '') {
         update_recipe($conn, $id, $title, $subtitle, $description, $main_image, $ingredients_image, $category_id);
 
         // AI-generated with ChatGPT
@@ -83,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p class="form-error"><?php echo e($error); ?></p>
   <?php endif; ?>
 
-  <form class="add-recipe-form" method="post">
+  <form class="add-recipe-form" method="post" enctype="multipart/form-data">
 
     <section class="add-recipe-section">
       <div class="form-section-heading">
@@ -129,12 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="form-group">
         <label for="main_image">Recipe Image</label>
-        <input type="text" id="main_image" name="main_image" value="<?php echo e($recipe['main_image']); ?>" required>
-      </div>
-
-      <div class="form-group">
-        <label for="ingredients_image">Ingredients Image</label>
-        <input type="text" id="ingredients_image" name="ingredients_image" value="<?php echo e($recipe['ingredients_image']); ?>" required>
+        <input type="file" id="main_image" name="main_image">
       </div>
     </section>
 
@@ -149,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div class="form-group">
           <label for="ingredients_image">Ingredients Image</label>
-          <input type="text" id="ingredients_image" name="ingredients_image" value="<?php echo e($recipe['ingredients_image']); ?>" required>
+          <input type="file" id="ingredients_image" name="ingredients_image">
         </div>
 
         <?php foreach ($ingredients as $ingredient): ?>
@@ -191,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
               <label>Step Image</label>
-              <input type="text" name="step_images[]" value="<?php echo e($step['step_image']); ?>" required>
+              <input type="file" name="step_images[]">
             </div>
 
           </div>
