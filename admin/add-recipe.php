@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="form-group">
         <label for="main_image">Recipe Image</label>
-        <input type="file" name="main_image" required>
+        <input type="file" id="main_image" name="main_image" required>
       </div>
     </section>
 
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-group">
           <label for="ingredients_image">Ingredients Image</label>
-          <input type="file" name="ingredients_image" required>
+          <input type="file" id="ingredients_image" name="ingredients_image" required>
         </div>
 
         <div class="ingredient-row">
