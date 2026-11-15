@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = get_post('description');
     
     try {
-        $main_image = save_upload(
+        $main_image = 'images/' . save_upload(
             $_FILES['main_image']['tmp_name'],
             $_FILES['main_image']['name'],
             $_FILES['main_image']['size'],
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $upload_folder
         );
 
-        $ingredients_image = save_upload(
+        $ingredients_image = 'images/' . save_upload(
             $_FILES['ingredients_image']['tmp_name'],
             $_FILES['ingredients_image']['name'],
             $_FILES['ingredients_image']['size'],
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $upload_folder
             );
 
-            $step_images[] = $saved;
+            $step_images[] = 'images/' . $saved;
 
         } catch (RuntimeException $e) {
             $error = $e->getMessage();
@@ -78,10 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id < 1 || $category_id > 3 || empty($ingredients) || empty($step_titles) ||
-    empty($step_descriptions) || empty($step_images)){
+    if ($error === '' && ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' ||
+    $category_id < 1 || $category_id > 3 || empty($ingredients) || empty($step_titles) || empty($step_descriptions) || empty($step_images))) {
         $error = 'Please complete all required fields.';
-    }else {
+    }
+
+    if ($error === '') {
         $recipe_id = create_recipe($conn, $title, $subtitle, $description, $main_image, $ingredients_image, $category_id);
         add_ingredients($conn, $recipe_id, $ingredients);
         add_steps($conn, $recipe_id, $step_titles, $step_descriptions, $step_images);
