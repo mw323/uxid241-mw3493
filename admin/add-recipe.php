@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p class="form-error"><?php echo e($error); ?></p>
   <?php endif; ?>
 
-  <form class="add-recipe-form" method="post">
+  <form class="add-recipe-form" method="post" enctype="multipart/form-data">
     <section class="add-recipe-section">
       <div class="form-section-heading">
         <h2>Recipe Details</h2>
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="form-group">
         <label for="main_image">Recipe Image</label>
-        <input type="text" id="main_image" name="main_image" placeholder="No image? Use: images/recipe-placeholder.png" required>
+        <input type="file" name="main_image" required>
       </div>
     </section>
 
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="form-group">
           <label for="ingredients_image">Ingredients Image</label>
-          <input type="text" id="ingredients_image" name="ingredients_image" placeholder="No image? Use: images/ingredient-placeholder.png" required>
+          <input type="file" name="ingredients_image" required>
         </div>
 
         <div class="ingredient-row">
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="form-group">
             <label>Step Image</label>
-            <input type="text" name="step_images[]" placeholder="No image? Use: images/step-placeholder.png" required>          
+            <input type="file" name="step_images[]" required>
           </div>
         </div>
 
@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="form-group">
             <label>Step Image</label>
-            <input type="text" name="step_images[]" placeholder="No image? Use: images/step-placeholder.png" required>          
+            <input type="file" name="step_images[]" required>
           </div>
         </div>
 
@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="form-group">
             <label>Step Image</label>
-            <input type="text" name="step_images[]" placeholder="No image? Use: images/step-placeholder.png" required>          
+            <input type="file" name="step_images[]" required>
           </div>
         </div>
       </div>
