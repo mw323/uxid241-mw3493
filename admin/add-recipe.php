@@ -102,11 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="main_image">Recipe Image</label>
         <input type="text" id="main_image" name="main_image" placeholder="No image? Use: images/recipe-placeholder.png" required>
       </div>
-
-      <div class="form-group">
-        <label for="ingredients_image">Ingredients Image</label>
-        <input type="text" id="ingredients_image" name="ingredients_image" placeholder="No image? Use: images/ingredient-placeholder.png" required>
-      </div>
     </section>
 
     <section class="add-recipe-section">
@@ -116,6 +111,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="ingredients-list" id="ingredientsList">
+
+        <div class="form-group">
+          <label for="ingredients_image">Ingredients Image</label>
+          <input type="text" id="ingredients_image" name="ingredients_image" placeholder="No image? Use: images/ingredient-placeholder.png" required>
+        </div>
 
         <div class="ingredient-row">
           <span>1</span>

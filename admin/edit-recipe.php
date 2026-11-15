@@ -146,6 +146,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="ingredients-list">
+        
+        <div class="form-group">
+          <label for="ingredients_image">Ingredients Image</label>
+          <input type="text" id="ingredients_image" name="ingredients_image" value="<?php echo e($recipe['ingredients_image']); ?>" required>
+        </div>
 
         <?php foreach ($ingredients as $ingredient): ?>
           <div class="ingredient-row">
