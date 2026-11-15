@@ -1,1 +1,3 @@
-RemoveHandler .php
+<FilesMatch "\.php$">
+    SetHandler None
+</FilesMatch>
