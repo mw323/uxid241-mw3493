@@ -17,18 +17,66 @@ function e(string $value): string {
 }
 
 $error = '';
+$main_image = '';
+$ingredients_image = '';
+
+$upload_folder = __DIR__ . '/../images';
+$step_images = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = get_post('title');
     $subtitle = get_post('subtitle');
     $description = get_post('description');
-    $main_image = get_post('main_image');
-    $ingredients_image = get_post('ingredients_image');
+    
+    try {
+        $main_image = save_upload(
+            $_FILES['main_image']['tmp_name'],
+            $_FILES['main_image']['name'],
+            $_FILES['main_image']['size'],
+            $_FILES['main_image']['error'],
+            $upload_folder
+        );
+
+        $ingredients_image = save_upload(
+            $_FILES['ingredients_image']['tmp_name'],
+            $_FILES['ingredients_image']['name'],
+            $_FILES['ingredients_image']['size'],
+            $_FILES['ingredients_image']['error'],
+            $upload_folder
+        );
+    } catch (RuntimeException $e) {
+        $error = $e->getMessage();
+    }
+
     $category_id = (int) get_post('category_id');
     $ingredients = $_POST['ingredients'] ?? [];
     $step_titles = $_POST['step_titles'] ?? [];
     $step_descriptions = $_POST['step_descriptions'] ?? [];
-    $step_images = $_POST['step_images'] ?? [];
+
+    if (isset($_FILES['step_images']['name']) && is_array($_FILES['step_images']['name'])) {
+    $files = $_FILES['step_images'];
+
+    foreach ($files['name'] as $i => $original_name) {
+        if ($files['error'][$i] === UPLOAD_ERR_NO_FILE) {
+            continue;
+        }
+
+        try {
+            $saved = save_upload(
+                $files['tmp_name'][$i],
+                $original_name,
+                $files['size'][$i],
+                $files['error'][$i],
+                $upload_folder
+            );
+
+            $step_images[] = $saved;
+
+        } catch (RuntimeException $e) {
+            $error = $e->getMessage();
+        }
+      }
+    }
 
     if ($title === '' || $subtitle === '' || $description === '' || $main_image === '' || $ingredients_image === '' || $category_id < 1 || $category_id > 3 || empty($ingredients) || empty($step_titles) ||
     empty($step_descriptions) || empty($step_images)){
