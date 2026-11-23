@@ -1,6 +1,13 @@
 <?php
 
 declare(strict_types=1);
+
+session_set_cookie_params([
+  'httponly' => true,
+  'secure' => true,
+  'samesite' => 'Lax',
+]);
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -185,5 +192,6 @@ foreach ($category_counts as $category_count) {
         <a class="footer-brand" href="index.php">addSalt</a>
         <p>&copy; 2026 addSalt. All rights reserved.</p>
     </footer>
+    <script src="../main.js"></script>
 </body>
 </html>

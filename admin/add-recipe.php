@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+session_set_cookie_params([
+  'httponly' => true,
+  'secure' => true,
+  'samesite' => 'Lax',
+]);
+
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -263,5 +269,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </form>
 </main>
+    <script src="../main.js"></script>
 </body>
 </html>
