@@ -138,5 +138,6 @@ $steps = steps_by_recipe($conn, $id);
       <a class="footer-brand" href="index.php">addSalt</a>
       <p>&copy; 2026 addSalt. All rights reserved.</p>
     </footer>
+    <script src="main.js"></script>
 </body>
 </html>
